@@ -1,5 +1,0 @@
-Markers
-=======
-	Font: Calibri 72pt
-	Printing Dimension: 1.7"*1.7"
-	Printer: FUJI XEROX Docuprint CM405df	<-- Seems to produce semi-glossy surface which reflects the light too much some times.
