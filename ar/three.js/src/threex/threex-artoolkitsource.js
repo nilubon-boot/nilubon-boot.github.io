@@ -212,7 +212,12 @@ ARjs.Source.prototype._initSourceWebcam = function (onReady, onError) {
             });
             // domElement.play();
 
-            onReady();
+			// Credit: https://chisel-pull.glitch.me/threex-artoolkitsource.js
+			var interval = setInterval(function() {
+				if (!domElement.videoWidth)	return;
+				onReady()
+				clearInterval(interval)
+			}, 1000/50);			   
         }).catch(function (error) {
             onError({
                 name: error.name,
