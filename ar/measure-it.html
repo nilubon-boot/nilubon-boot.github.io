@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+/>
 <!-- three.js library -->
 <script src='https://nilubon-boot.github.io/ar/three.js/examples/vendor/three.js/build/three.js'></script>
 <!-- jsartookit -->
@@ -10,9 +13,14 @@
 <script src="https://nilubon-boot.github.io/ar/three.js/src/threex/threex-artoolkitcontext.js"></script>
 <script src="https://nilubon-boot.github.io/ar/three.js/src/threex/threex-arbasecontrols.js"></script>
 <script src="https://nilubon-boot.github.io/ar/three.js/src/threex/threex-armarkercontrols.js"></script>
-<script>THREEx.ArToolkitContext.baseURL = 'https://nilubon-boot.github.io/ar/'</script>
+<script>
+	THREEx.ArToolkitContext.baseURL = 'https://nilubon-boot.github.io/ar/'
+</script>
 
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
+<title>Test 01</title>
+
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+	<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
 	<a href="https://github.com/jeromeetienne/AR.js/" target="_blank">AR.js</a> - Measure the distance between 2 markers - hiro and kanji
 	<br/>
 	Contact me any time at <a href='https://twitter.com/jerome_etienne' target='_blank'>@jerome_etienne</a>
@@ -109,7 +117,7 @@
 	//////////////////////////////////////////////////////////////////////////////
 
 	// build markerControls
-	var markerRoot1 = new THREE.Group
+	var markerRoot1 = new THREE.Group()
 	markerRoot1.name = 'marker1'
 	scene.add(markerRoot1)
 	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
@@ -131,7 +139,7 @@
 	//////////////////////////////////////////////////////////////////////////////
 
 	// build markerControls
-	var markerRoot2 = new THREE.Group
+	var markerRoot2 = new THREE.Group()
 	markerRoot2.name = 'marker2'
 	scene.add(markerRoot2)
 	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot2, {
