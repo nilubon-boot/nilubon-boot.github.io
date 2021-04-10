@@ -21,13 +21,11 @@
 	THREEx.ArToolkitContext.baseURL = 'https://nilubon-boot.github.io/ar/'
 </script>
 
-<title>Test 02</title>
+<title>Chapter 01</title>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 	<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
-	<a href="https://github.com/jeromeetienne/AR.js/" target="_blank">AR.js</a> - Measure the distance between 2 markers - hiro and kanji
-	<br/>
-	Contact me any time at <a href='https://twitter.com/jerome_etienne' target='_blank'>@jerome_etienne</a>
+	Test
 </div>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
@@ -67,14 +65,6 @@
 	var arToolkitSource = new THREEx.ArToolkitSource({
 		// to read from the webcam
 		sourceType : 'webcam',
-
-		// to read from an image
-		// sourceType : 'image',
-		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',
-
-		// to read from a video
-		// sourceType : 'video',
-		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
 	})
 
 	arToolkitSource.init(function onReady(){
@@ -126,8 +116,7 @@
 	scene.add(markerRoot1)
 	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type : 'pattern',
-		patternUrl : THREEx.ArToolkitContext.baseURL + 'data/data/patt.hiro',
-		// patternUrl : THREEx.ArToolkitContext.baseURL + 'data/data/patt.kanji',
+		patternUrl : THREEx.ArToolkitContext.baseURL + 'data/data/numbers/01.patt',
 	})
 
 	// add a gizmo in the center of the marker
