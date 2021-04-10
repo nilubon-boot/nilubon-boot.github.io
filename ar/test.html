@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<title>Test 06</title>
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <body style="margin : 0px; overflow: hidden;">
+		<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+        <a-marker preset="hiro">
+            <a-entity
+            scale="0.005 0.005 0.005"
+            gltf-model="https://nilubon-boot.github.io/ar/data/3dmodels/NOVELO_DIPLODOCUS.gltf"
+            ></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+        </a-scene>
+    </body>
+</html>
