@@ -89,7 +89,7 @@
 	// create atToolkitContext
 	var arToolkitContext = new THREEx.ArToolkitContext({
 		cameraParametersUrl: THREEx.ArToolkitContext.baseURL + 'data/data/camera_para.dat',
-		detectionMode: 'mono',
+		detectionMode: 'mono_and_matrix',
 	})
 	// initialize it
 	arToolkitContext.init(function onCompleted(){
