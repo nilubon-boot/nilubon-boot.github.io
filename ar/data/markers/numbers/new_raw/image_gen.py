@@ -30,7 +30,8 @@ for i in range(0, 10):
     w, h = d.textsize(t, font=fnt)
     d.text((int(pic_dimension[0]/2) - int(w/2), pic_dimension[1] - h - 15), t, font=fnt, fill=fnt_color)
     
-    for point_pos in dot_pos_list[0:i]:
+    if(i > 0):
+        point_pos = dot_pos_list[i - 1]
         d.rectangle(point_pos, fill=fnt_color, outline=None, width=1)
 
     print("---- Saving {}.".format(pic_filename))

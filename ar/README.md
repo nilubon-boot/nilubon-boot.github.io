@@ -11,4 +11,4 @@ Markers
 	
 Note
 ====
-	-	Somehow, the current 02.patt mistakes marker 01 as 02. (It does correctly recognize 02 tho.) Need to modify the marker images.
+	-	Now the code won't recognize pattern 02 through 04... Probably have the same problem with 05 - 09.
