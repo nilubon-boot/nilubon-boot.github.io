@@ -110,16 +110,20 @@ function initialize()
 	let loader = new THREE.TextureLoader();
 	let texture = loader.load( 'images/border.png' );
 		
-	let patternArray = ["numbers/pattern_files/pattern-01.patt", 
+	let patternArray = ["numbers/pattern_files/pattern-00.patt",
+						"numbers/pattern_files/pattern-01.patt", 
 						"numbers/pattern_files/pattern-02.patt", 
 						"numbers/pattern_files/pattern-03.patt", 
 						"numbers/pattern_files/pattern-04.patt", 
 						"numbers/pattern_files/pattern-05.patt", 
-						"patt.kanji", 
-						"patt.hiro"];
-	let colorArray   = [0xff0000, 0xff8800, 0xffff00, 0x00cc00, 0x0000ff, 0xcc00ff, 0xcccccc];
-						//red		orange	yellow		green	blue		purple		gray
-	for (let i = 0; i < 7; i++)
+						"numbers/pattern_files/pattern-06.patt", 
+						"numbers/pattern_files/pattern-07.patt", 
+						"numbers/pattern_files/pattern-08.patt", 
+						"numbers/pattern_files/pattern-09.patt"
+						]
+	let colorArray   = [0xffffff, 0xff0000, 0xff8800, 0xffff00, 0x00cc00, 0x0000ff, 0xcc00ff, 0xcccccc, 0x14baac, 0xf73bc5];
+						//white		red		orange		yellow	green		blue	purple		gray	turquoise	pink
+	for (let i = 0; i < patternArray.length; i++)
 	{
 		let markerRoot = new THREE.Group();
 		scene.add(markerRoot);
@@ -127,6 +131,10 @@ function initialize()
 			type : 'pattern', patternUrl : "data/markers/" + patternArray[i],
 		});
 	
+		if(i == 0){
+			continue
+		}
+		
 		let mesh = new THREE.Mesh( 
 			new THREE.CubeGeometry(1.25,1.25,1.25), 
 			new THREE.MeshBasicMaterial({color:colorArray[i], map:texture, transparent:true, opacity:0.5}) 
