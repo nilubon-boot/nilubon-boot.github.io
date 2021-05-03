@@ -1066,6 +1066,12 @@
 		ctx.arc(pos[0], pos[1], 8, 0, Math.PI * 2)
 		ctx.fillStyle = 'red'
 		ctx.fill()
+		
+		//console.log(`marker.id: ${marker.id}, marker.idPatt: ${marker.idPatt}`)
+		ctx.fillStyle = "black";
+		ctx.textAlign = "center";
+		ctx.font = "15px Arial";
+		ctx.fillText(`${marker.id}, ${Math.round(marker.cf * 100) / 100}`, pos[0], pos[1]); 
 	};
 
 

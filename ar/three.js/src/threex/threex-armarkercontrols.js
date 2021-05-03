@@ -247,6 +247,7 @@ ARjs.MarkerControls.prototype._initArtoolkit = function(){
 	                arController.loadMarker(_this.parameters.patternUrl, function(markerId) {
 				artoolkitMarkerId = markerId
 	                        arController.trackPatternMarkerId(artoolkitMarkerId, _this.parameters.size);
+							console.log(`url: ${_this.parameters.patternUrl}, id: ${markerId}`)
 	                });
 		}else if( _this.parameters.type === 'barcode' ){
 			artoolkitMarkerId = _this.parameters.barcodeValue
