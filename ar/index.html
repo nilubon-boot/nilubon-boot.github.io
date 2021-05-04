@@ -12,6 +12,7 @@
 	<script src="three.js/src/threex/threex-artoolkitcontext.js"></script>
 	<script src="three.js/src/threex/threex-arbasecontrols.js"></script>
 	<script src="three.js/src/threex/threex-armarkercontrols.js"></script>
+	<script src="https://unpkg.com/three@0.87.1/examples/js/loaders/GLTFLoader.js"></script>
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
@@ -38,8 +39,12 @@ function initialize()
 {
 	scene = new THREE.Scene();
 
-	let ambientLight = new THREE.AmbientLight( 0xcccccc, 0.5 );
+	let ambientLight = new THREE.AmbientLight( 0xcccccc, 1 );
 	scene.add( ambientLight );
+	
+	let pointLight = new THREE.PointLight( 0xffffcc, 5, 100 );
+	pointLight.position.set( 0, 30, 0 );
+	scene.add( pointLight );
 				
 	camera = new THREE.Camera();
 	scene.add(camera);
@@ -93,7 +98,7 @@ function initialize()
 	// create atToolkitContext
 	arToolkitContext = new THREEx.ArToolkitContext({
 		cameraParametersUrl: 'data/camera_para.dat',
-		debug: true,
+		//debug: true,
 		detectionMode: 'mono',
 		patternRatio: 0.75
 	});
@@ -135,12 +140,28 @@ function initialize()
 			continue
 		}
 		
+		if(i == 1){
+			var gtlfloader = new THREE.GLTFLoader();
+			gtlfloader.crossOrigin = true;
+			gtlfloader.load( 'data/3dmodels/NOVELO_DIPLODOCUS.gltf', function ( data ) {
+			  
+				var object = data.scene;
+				object.position.set(0, 1, 0);
+				object.scale.set(0.003, 0.003, 0.003)
+
+				markerRoot.add( object );
+			});
+			
+			continue
+		}
+		
 		let mesh = new THREE.Mesh( 
 			new THREE.CubeGeometry(1.25,1.25,1.25), 
 			new THREE.MeshBasicMaterial({color:colorArray[i], map:texture, transparent:true, opacity:0.5}) 
 		);
 		mesh.position.y = 1.25/2;
 		markerRoot.add( mesh );
+		
 	}
 }
 
