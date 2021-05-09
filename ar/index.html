@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<title>Test 05</title>
+	<title>Test 09</title>
 	
 	<!--	Credit:	https://github.com/jeromeetienne/AR.js/
 					https://github.com/stemkoski
@@ -159,8 +159,8 @@ function initialize()
 			// Credit: https://codepen.io/shshaw/pen/yPPOEg
 			var gtlfloader = new THREE.GLTFLoader();
 			gtlfloader.crossOrigin = true;
+			
 			gtlfloader.load( 'data/3dmodels/NOVELO_DIPLODOCUS.gltf', function ( data ) {
-			  
 				var object = data.scene;
 				object.position.set(0, 1, 0);
 				object.scale.set(0.003, 0.003, 0.003)
@@ -169,6 +169,26 @@ function initialize()
 				object.cursor = 'pointer';
 				object.on('click', function(ev) {
 					console.log('In onclick() for "1"');
+				});
+
+				markerRoot.add( object );
+			});
+			
+			continue
+		}else if(i == 2){
+			// Credit: https://codepen.io/shshaw/pen/yPPOEg
+			var gtlfloader = new THREE.GLTFLoader();
+			gtlfloader.crossOrigin = true;
+			
+			gtlfloader.load( 'data/3dmodels/Mesh_Dinosaur.gltf', function ( data ) {
+			  	var object = data.scene;
+				object.position.set(0, 1, -1.5);
+				object.scale.set(0.008, 0.008, 0.008)
+			
+				// Credit: https://github.com/jasonChen1982/three.interaction.js/blob/master/examples/interaction/index.html
+				object.cursor = 'pointer';
+				object.on('click', function(ev) {
+					console.log('In onclick() for "2"');
 				});
 
 				markerRoot.add( object );
