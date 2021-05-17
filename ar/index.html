@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<title>Test 09</title>
+	<title>Test 20</title>
 	
 	<!--	Credit:	https://github.com/jeromeetienne/AR.js/
 					https://github.com/stemkoski
@@ -143,8 +143,40 @@ function initialize()
 						]
 	let colorArray   = [0xffffff, 0xff0000, 0xff8800, 0xffff00, 0x00cc00, 0x0000ff, 0xcc00ff, 0xcccccc, 0x14baac, 0xf73bc5];
 						//white		red		orange		yellow	green		blue	purple		gray	turquoise	pink
-	for (let i = 0; i < patternArray.length; i++)
-	{
+						
+	model_config = 	[
+						{
+							"name": "01",
+							"path": "data/3dmodels/NOVELO_DIPLODOCUS.gltf",
+							"position": [0, 1, 0],
+							"scale": [0.003, 0.003, 0.003],
+						},
+						{
+							"name": "02",
+							"path": "data/3dmodels/Mesh_Dinosaur.gltf",
+							"position": [0, 1, -1.5],
+							"scale": [0.008, 0.008, 0.008],
+						}
+					]
+				
+	model_positions_config =	[
+									[0, 0, 0],
+									[0.8, 0, 0],
+									[-0.8, 0, 0],
+									[0, 0, -3],
+									[0, 0, 3],
+									[0.8, 0, -3],
+									[-0.8, 0, 3],
+									[-0.8, 0, -3],
+									[0.8, 0, 3]
+								]
+							
+							
+	
+	// For debugging purpose
+	showCubeInsteadOfDinosaur = false;
+	
+	for(let i = 0; i < patternArray.length; i++){
 		let markerRoot = new THREE.Group();
 		scene.add(markerRoot);
 		let markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
@@ -154,47 +186,30 @@ function initialize()
 		if(i == 0){
 			continue
 		}
-		
-		if(i == 1){
-			// Credit: https://codepen.io/shshaw/pen/yPPOEg
-			var gtlfloader = new THREE.GLTFLoader();
-			gtlfloader.crossOrigin = true;
-			
-			gtlfloader.load( 'data/3dmodels/NOVELO_DIPLODOCUS.gltf', function ( data ) {
-				var object = data.scene;
-				object.position.set(0, 1, 0);
-				object.scale.set(0.003, 0.003, 0.003)
+	
+		if(!showCubeInsteadOfDinosaur){
+			for(let j = 0; j < i; j++){
+				// Credit: https://codepen.io/shshaw/pen/yPPOEg
+				var gtlfloader = new THREE.GLTFLoader();
+				gtlfloader.crossOrigin = true;
 				
-				// Credit: https://github.com/jasonChen1982/three.interaction.js/blob/master/examples/interaction/index.html
-				object.cursor = 'pointer';
-				object.on('click', function(ev) {
-					console.log('In onclick() for "1"');
-				});
+				gtlfloader.load(model_config[0]["path"], function ( data ) {
+					var object = data.scene;
+					object.position.set(model_config[0]["position"][0] + model_positions_config[j][0], 
+										model_config[0]["position"][1] + model_positions_config[j][1], 
+										model_config[0]["position"][2] + model_positions_config[j][2]);
+					object.scale.set(model_config[0]["scale"][0], model_config[0]["scale"][1], model_config[0]["scale"][2]);
+					
+					// Credit: https://github.com/jasonChen1982/three.interaction.js/blob/master/examples/interaction/index.html
+					object.cursor = 'pointer';
+					object.on('click', function(ev) {
+						console.log(`In onclick() for ${model_config[0]["name"]}` );
+					});
 
-				markerRoot.add( object );
-			});
-			
-			continue
-		}else if(i == 2){
-			// Credit: https://codepen.io/shshaw/pen/yPPOEg
-			var gtlfloader = new THREE.GLTFLoader();
-			gtlfloader.crossOrigin = true;
-			
-			gtlfloader.load( 'data/3dmodels/Mesh_Dinosaur.gltf', function ( data ) {
-			  	var object = data.scene;
-				object.position.set(0, 1, -1.5);
-				object.scale.set(0.008, 0.008, 0.008)
-			
-				// Credit: https://github.com/jasonChen1982/three.interaction.js/blob/master/examples/interaction/index.html
-				object.cursor = 'pointer';
-				object.on('click', function(ev) {
-					console.log('In onclick() for "2"');
+					markerRoot.add( object );
 				});
-
-				markerRoot.add( object );
-			});
-			
-			continue
+			}
+			continue;
 		}
 		
 		let mesh = new THREE.Mesh( 
@@ -203,8 +218,8 @@ function initialize()
 		);
 		mesh.position.y = 1.25/2;
 		markerRoot.add( mesh );
-		
 	}
+
 }
 
 
