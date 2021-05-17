@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Test 20</title>
+	
+	<!--	Credit:	https://github.com/jeromeetienne/AR.js/
+					https://github.com/stemkoski
+	-->
+	<script src='three.js/examples/vendor/three.js/build/three.min.js'></script>
+	<script src="three.js/vendor/jsartoolkit5/build/artoolkit.min.js"></script>
+	<script src="three.js/vendor/jsartoolkit5/js/artoolkit.api.js"></script>
+	<script src="three.js/src/threex/threex-artoolkitsource.js"></script>
+	<script src="three.js/src/threex/threex-artoolkitcontext.js"></script>
+	<script src="three.js/src/threex/threex-arbasecontrols.js"></script>
+	<script src="three.js/src/threex/threex-armarkercontrols.js"></script>
+	
+	<!--	Credit:	https://codepen.io/shshaw/pen/yPPOEg
+	-->
+	<script src="https://unpkg.com/three@0.87.1/examples/js/loaders/GLTFLoader.js"></script>
+	
+	<!--	Credit:	https://github.com/jasonChen1982/three.interaction.js
+	-->
+	<script src="three.interaction.js/build/three.interaction.js"></script>
+	
+</head>
+
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+
+
+<script>
+
+var scene, camera, renderer, clock, deltaTime, totalTime;
+
+var arToolkitSource, arToolkitContext;
+
+var markerRoot1, markerRoot2;
+
+var mesh1;
+
+initialize();
+animate();
+
+function initialize()
+{
+	scene = new THREE.Scene();
+
+	let ambientLight = new THREE.AmbientLight( 0xcccccc, 1 );
+	scene.add( ambientLight );
+	
+	let pointLight = new THREE.PointLight( 0xffffcc, 5, 100 );
+	pointLight.position.set( 0, 30, 0 );
+	scene.add( pointLight );
+	
+	//camera = new THREE.Camera();
+	// Credit: https://github.com/jasonChen1982/three.interaction.js/
+	var WIDTH = window.innerWidth;
+	var HEIGHT = window.innerHeight;
+	camera = new THREE.PerspectiveCamera(60, WIDTH / HEIGHT, 0.01, 100);
+	scene.add(camera);
+
+	renderer = new THREE.WebGLRenderer({
+		antialias : true,
+		alpha: true
+	});
+
+	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+	renderer.setSize( 640, 480 );
+	renderer.domElement.style.position = 'absolute'
+	renderer.domElement.style.top = '0px'
+	renderer.domElement.style.left = '0px'
+	document.body.appendChild( renderer.domElement );
+
+	clock = new THREE.Clock();
+	deltaTime = 0;
+	totalTime = 0;
+	
+	
+	// Credit: https://github.com/jasonChen1982/three.interaction.js/
+	var interaction = new THREE.Interaction(renderer, scene, camera);
+	
+	
+	////////////////////////////////////////////////////////////
+	// setup arToolkitSource
+	////////////////////////////////////////////////////////////
+
+	arToolkitSource = new THREEx.ArToolkitSource({
+		sourceType : 'webcam',
+	});
+
+	function onResize()
+	{
+		arToolkitSource.onResize()	
+		arToolkitSource.copySizeTo(renderer.domElement)	
+		if ( arToolkitContext.arController !== null )
+		{
+			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
+		}	
+	}
+
+	arToolkitSource.init(function onReady(){
+		onResize()
+	});
+	
+	// handle resize event
+	window.addEventListener('resize', function(){
+		onResize()
+	});
+	
+	////////////////////////////////////////////////////////////
+	// setup arToolkitContext
+	////////////////////////////////////////////////////////////	
+
+	// create atToolkitContext
+	arToolkitContext = new THREEx.ArToolkitContext({
+		cameraParametersUrl: 'data/camera_para.dat',
+		//debug: true,
+		detectionMode: 'mono',
+		patternRatio: 0.75
+	});
+	
+	// copy projection matrix to camera when initialization complete
+	arToolkitContext.init( function onCompleted(){
+		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+	});
+
+	////////////////////////////////////////////////////////////
+	// setup markerRoots
+	////////////////////////////////////////////////////////////
+
+	let loader = new THREE.TextureLoader();
+	let texture = loader.load( 'images/border.png' );
+		
+	let patternArray = ["numbers/pattern_files/pattern-00.patt",
+						"numbers/pattern_files/pattern-01.patt", 
+						"numbers/pattern_files/pattern-02.patt", 
+						"numbers/pattern_files/pattern-03.patt", 
+						"numbers/pattern_files/pattern-04.patt", 
+						"numbers/pattern_files/pattern-05.patt", 
+						"numbers/pattern_files/pattern-06.patt", 
+						"numbers/pattern_files/pattern-07.patt", 
+						"numbers/pattern_files/pattern-08.patt", 
+						"numbers/pattern_files/pattern-09.patt"
+						]
+	let colorArray   = [0xffffff, 0xff0000, 0xff8800, 0xffff00, 0x00cc00, 0x0000ff, 0xcc00ff, 0xcccccc, 0x14baac, 0xf73bc5];
+						//white		red		orange		yellow	green		blue	purple		gray	turquoise	pink
+						
+	model_config = 	[
+						{
+							"name": "01",
+							"path": "data/3dmodels/NOVELO_DIPLODOCUS.gltf",
+							"position": [0, 1, 0],
+							"scale": [0.003, 0.003, 0.003],
+						},
+						{
+							"name": "02",
+							"path": "data/3dmodels/Mesh_Dinosaur.gltf",
+							"position": [0, 1, -1.5],
+							"scale": [0.008, 0.008, 0.008],
+						}
+					]
+				
+	model_positions_config =	[
+									[0, 0, 0],
+									[0.8, 0, 0],
+									[-0.8, 0, 0],
+									[0, 0, -3],
+									[0, 0, 3],
+									[0.8, 0, -3],
+									[-0.8, 0, 3],
+									[-0.8, 0, -3],
+									[0.8, 0, 3]
+								]
+							
+							
+	
+	// For debugging purpose
+	showCubeInsteadOfDinosaur = true;
+	
+	for(let i = 0; i < patternArray.length; i++){
+		let markerRoot = new THREE.Group();
+		scene.add(markerRoot);
+		let markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
+			type : 'pattern', patternUrl : "data/markers/" + patternArray[i],
+		});
+	
+		if(i == 0){
+			continue
+		}
+	
+		if(!showCubeInsteadOfDinosaur){
+			for(let j = 0; j < i; j++){
+				// Credit: https://codepen.io/shshaw/pen/yPPOEg
+				var gtlfloader = new THREE.GLTFLoader();
+				gtlfloader.crossOrigin = true;
+				
+				gtlfloader.load(model_config[0]["path"], function ( data ) {
+					var object = data.scene;
+					object.position.set(model_config[0]["position"][0] + model_positions_config[j][0], 
+										model_config[0]["position"][1] + model_positions_config[j][1], 
+										model_config[0]["position"][2] + model_positions_config[j][2]);
+					object.scale.set(model_config[0]["scale"][0], model_config[0]["scale"][1], model_config[0]["scale"][2]);
+					
+					// Credit: https://github.com/jasonChen1982/three.interaction.js/blob/master/examples/interaction/index.html
+					object.cursor = 'pointer';
+					object.on('click', function(ev) {
+						console.log(`In onclick() for ${model_config[0]["name"]}` );
+					});
+
+					markerRoot.add( object );
+				});
+			}
+			continue;
+		}
+		
+		let mesh = new THREE.Mesh( 
+			new THREE.CubeGeometry(1.25,1.25,1.25), 
+			new THREE.MeshBasicMaterial({color:colorArray[i], map:texture, transparent:true, opacity:0.5}) 
+		);
+		mesh.position.y = 1.25/2;
+		markerRoot.add( mesh );
+	}
+
+}
+
+
+function update()
+{
+	// update artoolkit on every frame
+	if ( arToolkitSource.ready !== false )
+		arToolkitContext.update( arToolkitSource.domElement );
+}
+
+
+function render()
+{
+	renderer.render( scene, camera );
+}
+
+
+function animate()
+{
+	requestAnimationFrame(animate);
+	deltaTime = clock.getDelta();
+	totalTime += deltaTime;
+	update();
+	render();
+}
+
+</script>
+
+</body>
+</html>
