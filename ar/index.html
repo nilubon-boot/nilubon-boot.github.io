@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<title>Test 20</title>
+	<title>Test 24</title>
 	
 	<!--	Credit:	https://github.com/jeromeetienne/AR.js/
 					https://github.com/stemkoski
@@ -41,7 +41,7 @@ initialize();
 animate();
 
 function initialize()
-{
+{	
 	scene = new THREE.Scene();
 
 	let ambientLight = new THREE.AmbientLight( 0xcccccc, 1 );
@@ -128,7 +128,7 @@ function initialize()
 	////////////////////////////////////////////////////////////
 
 	let loader = new THREE.TextureLoader();
-	let texture = loader.load( 'images/border.png' );
+	let texture_border = loader.load( 'images/border.png' );
 		
 	let patternArray = ["numbers/pattern_files/pattern-00.patt",
 						"numbers/pattern_files/pattern-01.patt", 
@@ -178,6 +178,7 @@ function initialize()
 	
 	for(let i = 0; i < patternArray.length; i++){
 		let markerRoot = new THREE.Group();
+		markerRoot.name = i.toString();
 		scene.add(markerRoot);
 		let markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
 			type : 'pattern', patternUrl : "data/markers/" + patternArray[i],
@@ -209,15 +210,45 @@ function initialize()
 					markerRoot.add( object );
 				});
 			}
-			continue;
-		}
+			
+			//-------------------------------------------------------- Show number above model
+			// Credit: https://github.com/jeromeetienne/AR.js/blob/master/three.js/examples/measure-it.html
+			var container = new THREE.Group
+			markerRoot.add(container)
+			
+			var canvas = document.createElement( 'canvas' );
+			canvas.width = 128;
+			canvas.height = 64;
+			var context = canvas.getContext( '2d' );
+			var texture = new THREE.CanvasTexture( canvas );
+
+			var material = new THREE.SpriteMaterial({
+				map: texture,
+				color: 0xffffff,
+			});
+			
+			var sprite = new THREE.Sprite( material );
+			sprite.scale.multiplyScalar(2)
+			container.add(sprite)
+
+			sprite.position.addVectors(markerRoot.position, new THREE.Vector3(0, 1, -2.5))
+
+			var text = i;
+
+			context.font = '40px monospace';
+			context.clearRect( 0, 0, canvas.width, canvas.height );
+			context.fillStyle = '#fff';
+			context.fillText(text, canvas.width/4, 3*canvas.height/4 )
+			sprite.material.map.needsUpdate = true
 		
-		let mesh = new THREE.Mesh( 
-			new THREE.CubeGeometry(1.25,1.25,1.25), 
-			new THREE.MeshBasicMaterial({color:colorArray[i], map:texture, transparent:true, opacity:0.5}) 
-		);
-		mesh.position.y = 1.25/2;
-		markerRoot.add( mesh );
+		}else{
+			let mesh = new THREE.Mesh( 
+				new THREE.CubeGeometry(1.25,1.25,1.25), 
+				new THREE.MeshBasicMaterial({color:colorArray[i], map:texture_border, transparent:true, opacity:0.5}) 
+			);
+			mesh.position.y = 1.25/2;
+			markerRoot.add( mesh );
+		}
 	}
 
 }
