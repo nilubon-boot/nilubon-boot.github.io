@@ -7,9 +7,10 @@ base_color = (244, 244, 244)
 pic_filename_base = "%02d.png"
 fnt_color = (0, 0, 0)
 dot_size = (60, 60)
-x_offset = int((170 - dot_size[0])/2)
-y_offset = int((170 - dot_size[1])/2)
-dot_list = [(((170*(i % 3)) + x_offset, (170*int(i/3)) + y_offset), ((170*(i % 3)) + x_offset + dot_size[0], (170*int(i/3)) + y_offset + dot_size[1])) for i in range(0, 9)]
+cell_wh = 140
+x_offset = int((cell_wh - dot_size[0])/2)
+y_offset = int((cell_wh - dot_size[1])/2)
+dot_list = [(((cell_wh*(i % 3)) + x_offset, (cell_wh*int(i/3)) + y_offset), ((cell_wh*(i % 3)) + x_offset + dot_size[0], (cell_wh*int(i/3)) + y_offset + dot_size[1])) for i in range(0, 9)]
             
 print(dot_list)
 
