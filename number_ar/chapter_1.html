@@ -4,7 +4,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<meta name="description" content="???">
+	<meta name="description" content="Children learn digits (number 0-9) through the use of AR markers on paper.">
 	<title>NUMBER AR - CHAPTER 1: Counting</title>
 	
 	<link rel="icon" href="static/freeicoms_io_20933744261596027129_light.svg">
@@ -33,7 +33,7 @@
 	-->
 	<script src="static/three.interaction.js/build/three.interaction.js"></script>
 	
-<style>
+	<style>
 		/*default theme*/
 		:root {
 			font-family: 'Roboto Mono', monospace;
@@ -136,8 +136,15 @@
 			margin-bottom: 2.5rem;
 		}
 		
-		.card > img {
-			border-radius: var(--mg-control-radius);
+		.card > a {
+			display: flex;
+		}
+		
+		.card > a > img {
+			width: 100%;
+			height: auto;
+			object-fit: contain;
+			padding: 20px;
 		}
 		
 		.card > .card-container {
@@ -150,6 +157,10 @@
 		
 		.card > .card-container > p {
 			text-align: left;
+		}
+		
+		hr.solid {
+			border-top: 4px solid var(--mg-color-secondary);
 		}
 	</style>
 	
@@ -173,6 +184,7 @@
 							<li><a href="index.html#about">ABOUT</a></li>
 							<li><a href="index.html#acknowledgment">ACKNOWLEDGMENT</a></li>
 						</ul>
+						<hr class="solid">
 						<ul id="lang-li">
 							<li><a href="#TH">ไทย</a></li>
 							<li class="active"><a href="#EN">EN</a></li>
@@ -196,35 +208,11 @@
 						<div class="mg-modal--content-scroll" style="padding-left: 10px;padding-right: 10px;">
 							<div id="lipsum">
 								<p>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Curabitur euismod tortor eget magna auctor, eu hendrerit
-									ipsum mattis. Etiam vitae ligula nulla. Nulla facilisi.
-									Maecenas eu orci ac erat mollis fringilla. Donec semper,
-									metus vitae laoreet fringilla, nisl velit auctor ligula,
-									vitae hendrerit lectus elit eu tellus. Mauris finibus,
-									ante quis malesuada interdum, odio massa scelerisque eros,
-									ac iaculis tellus turpis vitae dolor. Nullam id diam eu
-									tellus dictum tempor. Vestibulum finibus eros vitae
-									pretium varius.
+									Children can learn digits (number 0-9) through the use of AR markers on paper. 
 								</p>
+								<h4>For Instructors:</h4>
 								<p>
-									Aenean in ex eu ante viverra semper. Nullam at condimentum
-									quam. Sed elit sapien, maximus ac pretium ac, viverra
-									aliquam tortor. Class aptent taciti sociosqu ad litora
-									torquent per conubia nostra, per inceptos himenaeos. Cras
-									sed sapien fermentum, elementum mi efficitur, congue
-									tellus. Interdum et malesuada fames ac ante ipsum primis
-									in faucibus. Cras malesuada lorem enim, eget scelerisque
-									orci vestibulum a. Proin scelerisque enim nibh, egestas
-									euismod nunc aliquam vel. Pellentesque facilisis lacus
-									tortor, nec dictum augue porttitor nec. Quisque ut lacus
-									eleifend lorem lobortis fermentum nec sit amet lacus.
-									Vestibulum vehicula lobortis lectus ut pellentesque.
-									Nullam tempus in ligula at lacinia. Etiam accumsan
-									eleifend nunc, at rhoncus nulla tincidunt sed. Sed turpis
-									dui, hendrerit vitae finibus ut, luctus quis ligula.
-									Aenean venenatis id diam tempor interdum. Nulla mauris
-									est, lacinia a fermentum at, ullamcorper ut ante.
+									To use this page, please rotate the AR markers, one by one, and verbally reenforce recognition of digit symbols to the children. The printout for all digits' AR markers can be downloaded <a href="data/markers/numbers/20210816_markers_print.pdf">here.</a>
 								</p>
 							</div>
 						</div>
@@ -494,5 +482,19 @@
 		</div>
 	</main>
 	<script src="static/mg-plus/mg-plus-extensions.js"></script>
+	<script
+			  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+			  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+			  crossorigin="anonymous"></script>
+	<script>
+		$('#nav-li li').on('click', function(){
+			$('#nav-li li').removeClass('active');
+			$(this).addClass('active');
+		});
+		$('#lang-li li').on('click', function(){
+			$('#lang-li li').removeClass('active');
+			$(this).addClass('active');
+		});
+	</script>
 </body>
 </html>

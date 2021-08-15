@@ -4,7 +4,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<meta name="description" content="???">
+	<meta name="description" content="Learn to recognize numbers and simple arithmetic with AR.">
 	<title>NUMBER AR</title>
 
 	<link rel="icon" href="static/freeicoms_io_20933744261596027129_light.svg">
@@ -116,8 +116,15 @@
 			margin-bottom: 2.5rem;
 		}
 		
+		.card > a {
+			display: flex;
+		}
+		
 		.card > a > img {
-			border-radius: var(--mg-control-radius);
+			width: 100%;
+			height: auto;
+			object-fit: contain;
+			padding: 20px;
 		}
 		
 		.card > .card-container {
@@ -131,6 +138,40 @@
 		.card > .card-container > p {
 			text-align: left;
 		}
+		
+		hr.solid {
+			border-top: 4px solid var(--mg-color-secondary);
+		}
+		
+		body.loaded {
+			margin: 0;
+		}
+		
+		#home {
+			width: 100vw;
+			height: 100vh;
+		}
+		
+		#splash-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+		
+		#splash-text {
+			z-index: 3;
+			position: absolute;
+			margin-top: 70vh;
+			background-color: rgba(255, 255, 255, 0.7);
+			padding: 20px;
+			text-align: center;
+			width: 100%;
+		}
+		
+		#splash-text > a {
+			color: var(--mg-color-secondary);
+		}
+		
 	</style>
 	
 </head>
@@ -148,11 +189,12 @@
 						</button>
 					  <div class="mg-dropdown--menu mg-dropdown--menu-right" aria-hidden="true" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">
 						<ul id="nav-li">
-							<li class="active"><a href="index.html#home">HOME</a></li>
+							<li id="nav-li-home" class="active"><a href="index.html#home">HOME</a></li>
 							<li><a href="index.html#chapters">CHAPTERS</a></li>
 							<li><a href="index.html#about">ABOUT</a></li>
 							<li><a href="index.html#acknowledgment">ACKNOWLEDGMENT</a></li>
 						</ul>
+						<hr class="solid">
 						<ul id="lang-li">
 							<li><a href="#TH">ไทย</a></li>
 							<li class="active"><a href="#EN">EN</a></li>
@@ -162,110 +204,64 @@
 				</div>
 			</div>
 		</nav>
+		<div id="home" class="">
+			<h3 id="splash-text">
+				<a href="" class="typewrite" data-period="2000" data-type='[ "NUMBER AR", "Learn to recognize numbers and simple arithmetic with AR."]'>
+					<span class="typewrite-wrap"></span>
+				</a>
+			</h3>
+			<img id="splash-img" src="data/images/home_home_splash.gif">
+		</div>
 		<div class="page">
 			<div class="mg-container">
-
-				<section id="home" class="mg-center-block">
-					<h1 class="title">Home</h1>
-					<p>
-						Aenean in ex eu ante viverra semper. Nullam at condimentum
-						quam. Sed elit sapien, maximus ac pretium ac, viverra
-						aliquam tortor. Class aptent taciti sociosqu ad litora
-						torquent per conubia nostra, per inceptos himenaeos. Cras
-						sed sapien fermentum, elementum mi efficitur, congue
-						tellus. Interdum et malesuada fames ac ante ipsum primis
-						in faucibus. Cras malesuada lorem enim, eget scelerisque
-						orci vestibulum a. Proin scelerisque enim nibh, egestas
-						euismod nunc aliquam vel. Pellentesque facilisis lacus
-						tortor, nec dictum augue porttitor nec. Quisque ut lacus
-						eleifend lorem lobortis fermentum nec sit amet lacus.
-						Vestibulum vehicula lobortis lectus ut pellentesque.
-						Nullam tempus in ligula at lacinia. Etiam accumsan
-						eleifend nunc, at rhoncus nulla tincidunt sed. Sed turpis
-						dui, hendrerit vitae finibus ut, luctus quis ligula.
-						Aenean venenatis id diam tempor interdum. Nulla mauris
-						est, lacinia a fermentum at, ullamcorper ut ante.
-					</p>
-				</section>
 				<section id="chapters" class="mg-center-block">
 					<h1 class="title">Chapters</h1>
 					<div class="card mg-row">
 						<a class="mg-x12 mg-s5 mg-m5 mg-l5" href="chapter_1.html">
-							<img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Avatar">
+							<img src="data/images/home_chapters_chapter1_thumb.png" alt="Avatar">
 						</a>
 						<div class="card-container mg-x12 mg-s7 mg-m7 mg-l7">
 							<h3><b>CHAPTER 1: Counting</b></h3> 
-							<p>Cras malesuada lorem enim, eget scelerisque
-						orci vestibulum a. Proin scelerisque enim nibh, egestas
-						euismod nunc aliquam vel.</p> 
+							<p>Children learn digits (number 0-9) through the use of AR markers on paper.</p> 
 						</div>
 					</div>
 					<div class="card mg-row">
-						<a class="mg-x12 mg-s5 mg-m5 mg-l5" href="#">
+						<a class="mg-x12 mg-s5 mg-m5 mg-l5">
 							<img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Avatar">
 						</a>
 						<div class="card-container mg-x12 mg-s7 mg-m7 mg-l7">
 							<h3><b>CHAPTER 2: Simple Operations</b></h3> 
-							<p>Cras malesuada lorem enim, eget scelerisque
-						orci vestibulum a. Proin scelerisque enim nibh, egestas
-						euismod nunc aliquam vel.</p> 
+							<p>[Under Construction] Children learn addition and subtraction of single digit numbers.</p> 
 						</div>
 					</div>
 					<div class="card mg-row">
-						<a class="mg-x12 mg-s5 mg-m5 mg-l5" href="#">
+						<a class="mg-x12 mg-s5 mg-m5 mg-l5">
 							<img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Avatar">
 						</a>
 						<div class="card-container mg-x12 mg-s7 mg-m7 mg-l7">
 							<h3><b>CHAPTER 3: Multiple Operations</b></h3> 
-							<p>Cras malesuada lorem enim, eget scelerisque
-						orci vestibulum a. Proin scelerisque enim nibh, egestas
-						euismod nunc aliquam vel.</p> 
+							<p>[Under Construction] Children learn nested addtions/subtractions of single digit numbers.</p> 
 						</div>
 					</div>
 				</section>
 				<section id="about" class="mg-center-block">
 					<h1 class="title">About</h1>
 									<p>
-						Aenean in ex eu ante viverra semper. Nullam at condimentum
-						quam. Sed elit sapien, maximus ac pretium ac, viverra
-						aliquam tortor. Class aptent taciti sociosqu ad litora
-						torquent per conubia nostra, per inceptos himenaeos. Cras
-						sed sapien fermentum, elementum mi efficitur, congue
-						tellus. Interdum et malesuada fames ac ante ipsum primis
-						in faucibus. Cras malesuada lorem enim, eget scelerisque
-						orci vestibulum a. Proin scelerisque enim nibh, egestas
-						euismod nunc aliquam vel. Pellentesque facilisis lacus
-						tortor, nec dictum augue porttitor nec. Quisque ut lacus
-						eleifend lorem lobortis fermentum nec sit amet lacus.
-						Vestibulum vehicula lobortis lectus ut pellentesque.
-						Nullam tempus in ligula at lacinia. Etiam accumsan
-						eleifend nunc, at rhoncus nulla tincidunt sed. Sed turpis
-						dui, hendrerit vitae finibus ut, luctus quis ligula.
-						Aenean venenatis id diam tempor interdum. Nulla mauris
-						est, lacinia a fermentum at, ullamcorper ut ante.
+						[Under Construction]
 					</p>
 				</section>
 				<section id="acknowledgment" class="mg-center-block">
 				<h1 class="title">Acknowledgment</h1>
-								<p>
-					Aenean in ex eu ante viverra semper. Nullam at condimentum
-					quam. Sed elit sapien, maximus ac pretium ac, viverra
-					aliquam tortor. Class aptent taciti sociosqu ad litora
-					torquent per conubia nostra, per inceptos himenaeos. Cras
-					sed sapien fermentum, elementum mi efficitur, congue
-					tellus. Interdum et malesuada fames ac ante ipsum primis
-					in faucibus. Cras malesuada lorem enim, eget scelerisque
-					orci vestibulum a. Proin scelerisque enim nibh, egestas
-					euismod nunc aliquam vel. Pellentesque facilisis lacus
-					tortor, nec dictum augue porttitor nec. Quisque ut lacus
-					eleifend lorem lobortis fermentum nec sit amet lacus.
-					Vestibulum vehicula lobortis lectus ut pellentesque.
-					Nullam tempus in ligula at lacinia. Etiam accumsan
-					eleifend nunc, at rhoncus nulla tincidunt sed. Sed turpis
-					dui, hendrerit vitae finibus ut, luctus quis ligula.
-					Aenean venenatis id diam tempor interdum. Nulla mauris
-					est, lacinia a fermentum at, ullamcorper ut ante.
+				<p>
+					First and foremost, we thank <a href="https://ar-js-org.github.io/AR.js-Docs/">AR.js</a> team for providing the back-bone framework of this project, and also <a href="https://github.com/jeromeetienne">Jerome Etienne</a> and <a href="https://github.com/stemkoski">Prof. Lee Stemkoski</a> and <a href="https://github.com/jasonChen1982">JC</a> for providing valuable examples. This project would not be completed without the resources you share. Please know that we are deeply grateful for your work. Thank you very much.
 				</p>
+				<p>
+					Next, we thank the team behind <a href="https://evodim.github.io/mgplus/">Mg+ CSS Framework</a>. Your work has made this website more visually pleasing than our skills alone can achieve. Thank you very much. Any lacking is our own shortcoming.
+				</p>
+				<p>
+					We also would like to thank the community of Github, StackOverflow, Codepen.io, other resource sharing platforms and the people on them. Not being able to name all of you, we hope giving you credits in our code could be accepted as a way of expressing gratitude. Thank you very much.
+				</p>
+				
 			</section>
 			</div>
 		</div>
@@ -303,10 +299,68 @@
 			  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
 			  crossorigin="anonymous"></script>
 	<script>
-		$('li').on('click', function(){
-			$('li').removeClass('active');
+		$('#nav-li li').on('click', function(){
+			$('#nav-li li').removeClass('active');
 			$(this).addClass('active');
 		});
+		$('#lang-li li').on('click', function(){
+			$('#lang-li li').removeClass('active');
+			$(this).addClass('active');
+		});
+	</script>
+	<script>
+		//Credit: https://css-tricks.com/snippets/css/typewriter-effect/
+		var TxtType = function(el, toRotate, period) {
+				this.toRotate = toRotate;
+				this.el = el;
+				this.loopNum = 0;
+				this.period = parseInt(period, 10) || 2000;
+				this.txt = '';
+				this.tick();
+				this.isDeleting = false;
+			};
+
+			TxtType.prototype.tick = function() {
+				var i = this.loopNum % this.toRotate.length;
+				var fullTxt = this.toRotate[i];
+
+				if (this.isDeleting) {
+				this.txt = fullTxt.substring(0, this.txt.length - 1);
+				} else {
+				this.txt = fullTxt.substring(0, this.txt.length + 1);
+				}
+
+				this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+				var that = this;
+				var delta = 200 - Math.random() * 100;
+
+				if (this.isDeleting) { delta /= 2; }
+
+				if (!this.isDeleting && this.txt === fullTxt) {
+				delta = this.period;
+				this.isDeleting = true;
+				} else if (this.isDeleting && this.txt === '') {
+				this.isDeleting = false;
+				this.loopNum++;
+				delta = 500;
+				}
+
+				setTimeout(function() {
+				that.tick();
+				}, delta);
+			};
+
+			window.onload = function() {
+				var elements = document.getElementsByClassName('typewrite');
+				for (var i=0; i<elements.length; i++) {
+					var toRotate = elements[i].getAttribute('data-type');
+					var period = elements[i].getAttribute('data-period');
+					if (toRotate) {
+					  new TxtType(elements[i], JSON.parse(toRotate), period);
+					}
+				}
+			};
 	</script>
 </body>
 </html>
