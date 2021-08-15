@@ -252,7 +252,7 @@
 						let ambientLight = new THREE.AmbientLight( 0xcccccc, 1 );
 						scene.add( ambientLight );
 						
-						let pointLight = new THREE.PointLight( 0xffffcc, 5, 100 );
+						let pointLight = new THREE.PointLight( 0xffffcc, 1, 100 );
 						pointLight.position.set( 0, 30, 0 );
 						scene.add( pointLight );
 						
@@ -352,9 +352,9 @@
 						model_config = 	[
 											{
 												"name": "01",
-												"path": "data/3dmodels/NOVELO_DIPLODOCUS.gltf",
-												"position": [0, 1, 0],
-												"scale": [0.003, 0.003, 0.003],
+												"path": "data/3dmodels/stego/Dinosaur.glb",
+												"position": [-2, 1, 0],
+												"scale": [0.5, 0.5, 0.5],
 											},
 											{
 												"name": "02",
@@ -436,13 +436,19 @@
 								sprite.scale.multiplyScalar(2)
 								container.add(sprite)
 
-								sprite.position.addVectors(markerRoot.position, new THREE.Vector3(0, 1.5, -2.5))
+								sprite.position.addVectors(markerRoot.position, new THREE.Vector3(0, 4, 0))
 
 								var text = i;
 
-								context.font = '40px monospace';
+								context.font = '40px Arial';
 								context.clearRect( 0, 0, canvas.width, canvas.height );
-								context.fillStyle = '#fff';
+								
+								var gradient = context.createLinearGradient(0, 0, canvas.width, 0);
+								gradient.addColorStop("0", "#e07e34");
+								gradient.addColorStop("0.5", "#ff4d96");
+								
+								context.fillStyle = gradient;
+								
 								context.fillText(text, canvas.width/4, 3*canvas.height/4 )
 								sprite.material.map.needsUpdate = true
 							
