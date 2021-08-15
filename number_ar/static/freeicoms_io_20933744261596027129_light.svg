@@ -1,0 +1,11 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1">
+
+ <g>
+  <title>Layer 1</title>
+  <polyline id="svg_5" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#aaffff" fill="none" points="9.9,5 3,5 3,24 29,24 29,5 22.1,5 " class="st0"/>
+  <polygon id="svg_1" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#aaffff" fill="none" points="16.217390537261963,1.782609462738037 8.217390537261963,5.682609558105469 16.217390537261963,9.5826096534729 24.217390537261963,5.682609558105469 " class="st0"/>
+  <polyline id="svg_2" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#aaffff" fill="none" points="8,5.9 8,15.1 16,19 24,15.1 24,5.9 " class="st0"/>
+  <line id="svg_3" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#aaffff" fill="none" y2="19" x2="16" y1="9.8" x1="16" class="st0"/>
+  <polyline id="svg_4" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#aaffff" fill="none" points="20,27 22,30 10,30 12,27 " class="st0"/>
+ </g>
+</svg>

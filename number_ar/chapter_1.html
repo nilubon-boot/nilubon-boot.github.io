@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="description" content="???">
+	<title>NUMBER AR - CHAPTER 1: Counting</title>
+	
+	<link rel="icon" href="static/freeicoms_io_20933744261596027129_light.svg">
+	<link rel="stylesheet" type="text/css" href="static/mg-plus/mg-plus.css">
+	<link rel="stylesheet" type="text/css" href="static/mg-plus/site.css">
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
+	
+	<!--	Credit:	https://github.com/jeromeetienne/AR.js/
+					https://github.com/stemkoski
+	-->
+	<script src='static/three.js/examples/vendor/three.js/build/three.min.js'></script>
+	<script src="static/three.js/vendor/jsartoolkit5/build/artoolkit.min.js"></script>
+	<script src="static/three.js/vendor/jsartoolkit5/js/artoolkit.api.js"></script>
+	<script src="static/three.js/src/threex/threex-artoolkitsource.js"></script>
+	<script src="static/three.js/src/threex/threex-artoolkitcontext.js"></script>
+	<script src="static/three.js/src/threex/threex-arbasecontrols.js"></script>
+	<script src="static/three.js/src/threex/threex-armarkercontrols.js"></script>
+	
+	<!--	Credit:	https://codepen.io/shshaw/pen/yPPOEg
+	-->
+	<script src="https://unpkg.com/three@0.87.1/examples/js/loaders/GLTFLoader.js"></script>
+	
+	<!--	Credit:	https://github.com/jasonChen1982/three.interaction.js
+	-->
+	<script src="static/three.interaction.js/build/three.interaction.js"></script>
+	
+<style>
+		/*default theme*/
+		:root {
+			font-family: 'Roboto Mono', monospace;
+			--mg-color-primary: #e07e34;
+			--mg-color-secondary: #0a8c8c;
+			--mg-control-radius: 1.5rem;
+			--mg-input-radius: 1rem;
+		}
+
+		h1.title {
+			text-transform: uppercase;
+			color: var(--mg-color-primary);
+		}
+	  
+		section {
+			padding-top: 15vh;
+			padding-left: 10px;
+			padding-right: 10px;
+			min-height: 100vh;
+		}
+		
+		.mg-dropdown--menu > ul > li.active {
+			color: var(--mg-color-initial);
+			border-left: 0.3rem solid var(--mg-color-primary);
+			overflow-y: hidden;
+			font-weight: bold; 
+		}
+		
+		#button-modal-info {
+			z-index: 1;
+			text-align: center;
+			padding-left: 10px;
+			padding-right: 10px;
+			color: var(--mg-color-light);
+			position: fixed;
+			right: 0;
+			bottom: 5vh;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+			width: 20vw;
+			opacity: 95%;
+		}
+		
+		#button-nav {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+			border-top-left-radius: 0;
+			width: 20vw;
+		}
+		
+		button {
+			font-family: 'Roboto Mono', monospace;
+			border: 0.0rem solid var(--mg-color-primary);
+		}
+		
+		#lang-li {
+			display: flex;
+		}
+		
+		#lang-li > li {
+			width: 50%;
+			text-align: center;
+			font-size: 1.5rem;
+		}
+		
+		.main-title-background {
+			background: linear-gradient(90deg, rgba(10,140,140,1) 0%, rgba(10,83,140,1) 70%, rgba(10,83,140,1) 100%);
+		}
+		
+		.main-menu-background {
+			background: linear-gradient(90deg, rgba(224,126,52,1) 0%, rgba(255,77,150,1) 100%);
+		}
+		
+		.main-modal-button-background {
+			background: linear-gradient(90deg, rgba(224,126,52,1) 40%, rgba(251,126,177,1) 100%);
+		}
+		
+		.mg-dropdown--menu {
+			width: max-content;
+			box-shadow: var(--mg-control-shadow);
+			min-width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			border: 0px solid;
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+			display: none;
+			position: absolute;
+			background-color: var(--mg-color-initial);
+			top: 100%;
+			z-index: 1;
+			border-color: var(--mg-color-quaternary);
+			border-radius: var(--mg-input-radius);
+		}
+		
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			border-radius: var(--mg-control-radius);
+			transition: 0.3s;
+			margin-bottom: 2.5rem;
+		}
+		
+		.card > img {
+			border-radius: var(--mg-control-radius);
+		}
+		
+		.card > .card-container {
+			padding: 20px;
+		}
+		
+		.card > .card-container > h {
+			text-align: center;
+		}
+		
+		.card > .card-container > p {
+			text-align: left;
+		}
+	</style>
+	
+</head>
+<body class="loaded">
+	<main class="wrapper">
+		<nav class="navigation" style="opacity: 95%;">
+			<div class="mg-container">
+				<div class="mg-row mg-x12 mg-x--baseline main-title-background">
+					<div title="NUMBER AR" class="navigation-title mg-left mg-x9 mg-s9 mg-m9">
+						<img class="logo" style="margin-right: 5px;margin-left: 5px;" src="static/freeicoms_io_20933744261596027129_light.svg"><span id="navbar-title">NUMBER AR - CHAPTER 1: Counting</span>
+					</div>
+					<div class="mg-dropdown" style="position: fixed;right: 0;">
+						<button id="button-nav" class="main-menu-background" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							MENU
+						</button>
+					  <div class="mg-dropdown--menu mg-dropdown--menu-right" aria-hidden="true" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">
+						<ul id="nav-li">
+							<li class="active"><a href="index.html#home">HOME</a></li>
+							<li><a href="index.html#chapters">CHAPTERS</a></li>
+							<li><a href="index.html#about">ABOUT</a></li>
+							<li><a href="index.html#acknowledgment">ACKNOWLEDGMENT</a></li>
+						</ul>
+						<ul id="lang-li">
+							<li><a href="#TH">ไทย</a></li>
+							<li class="active"><a href="#EN">EN</a></li>
+						</ul>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div class="page">
+			<div class="mg-container">
+			
+				<button id="button-modal-info" class="main-modal-button-background" data-toggle="modal" data-target="modal-01">
+					INFO
+				</button>
+				
+				<div class="mg-modal" id="modal-01">
+					<div class="mg-modal--content mg-container" style="width: 95%;opacity: 90%;">
+						<span class="mg-modal--closebtn mg-icon-close"> </span>
+						<h3>CHAPTER 1: Counting</h3>
+						<div class="mg-modal--content-scroll" style="padding-left: 10px;padding-right: 10px;">
+							<div id="lipsum">
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Curabitur euismod tortor eget magna auctor, eu hendrerit
+									ipsum mattis. Etiam vitae ligula nulla. Nulla facilisi.
+									Maecenas eu orci ac erat mollis fringilla. Donec semper,
+									metus vitae laoreet fringilla, nisl velit auctor ligula,
+									vitae hendrerit lectus elit eu tellus. Mauris finibus,
+									ante quis malesuada interdum, odio massa scelerisque eros,
+									ac iaculis tellus turpis vitae dolor. Nullam id diam eu
+									tellus dictum tempor. Vestibulum finibus eros vitae
+									pretium varius.
+								</p>
+								<p>
+									Aenean in ex eu ante viverra semper. Nullam at condimentum
+									quam. Sed elit sapien, maximus ac pretium ac, viverra
+									aliquam tortor. Class aptent taciti sociosqu ad litora
+									torquent per conubia nostra, per inceptos himenaeos. Cras
+									sed sapien fermentum, elementum mi efficitur, congue
+									tellus. Interdum et malesuada fames ac ante ipsum primis
+									in faucibus. Cras malesuada lorem enim, eget scelerisque
+									orci vestibulum a. Proin scelerisque enim nibh, egestas
+									euismod nunc aliquam vel. Pellentesque facilisis lacus
+									tortor, nec dictum augue porttitor nec. Quisque ut lacus
+									eleifend lorem lobortis fermentum nec sit amet lacus.
+									Vestibulum vehicula lobortis lectus ut pellentesque.
+									Nullam tempus in ligula at lacinia. Etiam accumsan
+									eleifend nunc, at rhoncus nulla tincidunt sed. Sed turpis
+									dui, hendrerit vitae finibus ut, luctus quis ligula.
+									Aenean venenatis id diam tempor interdum. Nulla mauris
+									est, lacinia a fermentum at, ullamcorper ut ante.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="ar-code">
+					<script>
+
+					var scene, camera, renderer, clock, deltaTime, totalTime;
+
+					var arToolkitSource, arToolkitContext;
+
+					var markerRoot1, markerRoot2;
+
+					var mesh1;
+
+					initialize();
+					animate();
+
+					function initialize()
+					{	
+						scene = new THREE.Scene();
+
+						let ambientLight = new THREE.AmbientLight( 0xcccccc, 1 );
+						scene.add( ambientLight );
+						
+						let pointLight = new THREE.PointLight( 0xffffcc, 5, 100 );
+						pointLight.position.set( 0, 30, 0 );
+						scene.add( pointLight );
+						
+						//camera = new THREE.Camera();
+						// Credit: https://github.com/jasonChen1982/three.interaction.js/
+						var WIDTH = window.innerWidth;
+						var HEIGHT = window.innerHeight;
+						camera = new THREE.PerspectiveCamera(60, WIDTH / HEIGHT, 0.01, 100);
+						scene.add(camera);
+
+						renderer = new THREE.WebGLRenderer({
+							antialias : true,
+							alpha: true
+						});
+
+						renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+						renderer.setSize( 640, 480 );
+						renderer.domElement.style.position = 'absolute'
+						renderer.domElement.style.top = '0px'
+						renderer.domElement.style.left = '0px'
+						document.body.appendChild( renderer.domElement );
+
+						clock = new THREE.Clock();
+						deltaTime = 0;
+						totalTime = 0;
+						
+						
+						// Credit: https://github.com/jasonChen1982/three.interaction.js/
+						var interaction = new THREE.Interaction(renderer, scene, camera);
+						
+						
+						////////////////////////////////////////////////////////////
+						// setup arToolkitSource
+						////////////////////////////////////////////////////////////
+
+						arToolkitSource = new THREEx.ArToolkitSource({
+							sourceType : 'webcam',
+						});
+
+						function onResize()
+						{
+							arToolkitSource.onResize()	
+							arToolkitSource.copySizeTo(renderer.domElement)	
+							if ( arToolkitContext.arController !== null )
+							{
+								arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
+							}	
+						}
+
+						arToolkitSource.init(function onReady(){
+							onResize()
+						});
+						
+						// handle resize event
+						window.addEventListener('resize', function(){
+							onResize()
+						});
+						
+						////////////////////////////////////////////////////////////
+						// setup arToolkitContext
+						////////////////////////////////////////////////////////////	
+
+						// create atToolkitContext
+						arToolkitContext = new THREEx.ArToolkitContext({
+							cameraParametersUrl: 'data/camera_para.dat',
+							//debug: true,
+							detectionMode: 'mono',
+							patternRatio: 0.75
+						});
+						
+						// copy projection matrix to camera when initialization complete
+						arToolkitContext.init( function onCompleted(){
+							camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+						});
+
+						////////////////////////////////////////////////////////////
+						// setup markerRoots
+						////////////////////////////////////////////////////////////
+
+						let loader = new THREE.TextureLoader();
+						let texture_border = loader.load( 'static/border.png' );
+							
+						let patternArray = ["numbers/pattern_files/pattern-00.patt",
+											"numbers/pattern_files/pattern-01.patt", 
+											"numbers/pattern_files/pattern-02.patt", 
+											"numbers/pattern_files/pattern-03.patt", 
+											"numbers/pattern_files/pattern-04.patt", 
+											"numbers/pattern_files/pattern-05.patt", 
+											"numbers/pattern_files/pattern-06.patt", 
+											"numbers/pattern_files/pattern-07.patt", 
+											"numbers/pattern_files/pattern-08.patt", 
+											"numbers/pattern_files/pattern-09.patt"
+											]
+						let colorArray   = [0xffffff, 0xff0000, 0xff8800, 0xffff00, 0x00cc00, 0x0000ff, 0xcc00ff, 0xcccccc, 0x14baac, 0xf73bc5];
+											//white		red		orange		yellow	green		blue	purple		gray	turquoise	pink
+											
+						model_config = 	[
+											{
+												"name": "01",
+												"path": "data/3dmodels/NOVELO_DIPLODOCUS.gltf",
+												"position": [0, 1, 0],
+												"scale": [0.003, 0.003, 0.003],
+											},
+											{
+												"name": "02",
+												"path": "data/3dmodels/Mesh_Dinosaur.gltf",
+												"position": [0, 1, -1.5],
+												"scale": [0.008, 0.008, 0.008],
+											}
+										]
+									
+						model_positions_config =	[
+														[0, 0, 0],
+														[0.8, 0, 0],
+														[-0.8, 0, 0],
+														[0, 0, -3],
+														[0, 0, 3],
+														[0.8, 0, -3],
+														[-0.8, 0, 3],
+														[-0.8, 0, -3],
+														[0.8, 0, 3]
+													]
+												
+												
+						
+						// For debugging purpose
+						showCubeInsteadOfDinosaur = false;
+						
+						for(let i = 0; i < patternArray.length; i++){
+							let markerRoot = new THREE.Group();
+							markerRoot.name = i.toString();
+							scene.add(markerRoot);
+							let markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
+								type : 'pattern', patternUrl : "data/markers/" + patternArray[i],
+							});
+						
+							if(i == 0){
+								continue
+							}
+						
+							if(!showCubeInsteadOfDinosaur){
+								for(let j = 0; j < i; j++){
+									// Credit: https://codepen.io/shshaw/pen/yPPOEg
+									var gtlfloader = new THREE.GLTFLoader();
+									gtlfloader.crossOrigin = true;
+									
+									gtlfloader.load(model_config[0]["path"], function ( data ) {
+										var object = data.scene;
+										object.position.set(model_config[0]["position"][0] + model_positions_config[j][0], 
+															model_config[0]["position"][1] + model_positions_config[j][1], 
+															model_config[0]["position"][2] + model_positions_config[j][2]);
+										object.scale.set(model_config[0]["scale"][0], model_config[0]["scale"][1], model_config[0]["scale"][2]);
+										
+										// Credit: https://github.com/jasonChen1982/three.interaction.js/blob/master/examples/interaction/index.html
+										object.cursor = 'pointer';
+										object.on('click', function(ev) {
+											console.log(`In onclick() for ${model_config[0]["name"]}` );
+										});
+
+										markerRoot.add( object );
+									});
+								}
+								
+								//-------------------------------------------------------- Show number above model
+								// Credit: https://github.com/jeromeetienne/AR.js/blob/master/three.js/examples/measure-it.html
+								var container = new THREE.Group
+								markerRoot.add(container)
+								
+								var canvas = document.createElement( 'canvas' );
+								canvas.width = 128;
+								canvas.height = 64;
+								var context = canvas.getContext( '2d' );
+								var texture = new THREE.CanvasTexture( canvas );
+
+								var material = new THREE.SpriteMaterial({
+									map: texture,
+									color: 0xffffff,
+								});
+								
+								var sprite = new THREE.Sprite( material );
+								sprite.scale.multiplyScalar(2)
+								container.add(sprite)
+
+								sprite.position.addVectors(markerRoot.position, new THREE.Vector3(0, 1.5, -2.5))
+
+								var text = i;
+
+								context.font = '40px monospace';
+								context.clearRect( 0, 0, canvas.width, canvas.height );
+								context.fillStyle = '#fff';
+								context.fillText(text, canvas.width/4, 3*canvas.height/4 )
+								sprite.material.map.needsUpdate = true
+							
+							}else{
+								let mesh = new THREE.Mesh( 
+									new THREE.CubeGeometry(1.25,1.25,1.25), 
+									new THREE.MeshBasicMaterial({color:colorArray[i], map:texture_border, transparent:true, opacity:0.5}) 
+								);
+								mesh.position.y = 1.25/2;
+								markerRoot.add( mesh );
+							}
+						}
+
+					}
+
+
+					function update()
+					{
+						// update artoolkit on every frame
+						if ( arToolkitSource.ready !== false )
+							arToolkitContext.update( arToolkitSource.domElement );
+					}
+
+
+					function render()
+					{
+						renderer.render( scene, camera );
+					}
+
+
+					function animate()
+					{
+						requestAnimationFrame(animate);
+						deltaTime = clock.getDelta();
+						totalTime += deltaTime;
+						update();
+						render();
+					}
+
+					</script>
+				</div>
+			</div>
+		</div>
+	</main>
+	<script src="static/mg-plus/mg-plus-extensions.js"></script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="description" content="???">
+	<title>NUMBER AR</title>
+
+	<link rel="icon" href="static/freeicoms_io_20933744261596027129_light.svg">
+	<link rel="stylesheet" type="text/css" href="static/mg-plus/mg-plus.css">
+	<link rel="stylesheet" type="text/css" href="static/mg-plus/site.css">
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
+	<style>
+		/*default theme*/
+		:root {
+			font-family: 'Roboto Mono', monospace;
+			--mg-color-primary: #e07e34;
+			--mg-color-secondary: #0a8c8c;
+			--mg-control-radius: 1.5rem;
+			--mg-input-radius: 1rem;
+		}
+
+		h1.title {
+			text-transform: uppercase;
+			color: var(--mg-color-primary);
+		}
+	  
+		section {
+			padding-top: 15vh;
+			padding-left: 10px;
+			padding-right: 10px;
+			min-height: 100vh;
+		}
+		
+		.mg-dropdown--menu > ul > li.active {
+			color: var(--mg-color-initial);
+			border-left: 0.3rem solid var(--mg-color-primary);
+			overflow-y: hidden;
+			font-weight: bold; 
+		}
+		
+		#button-modal-info {
+			z-index: 1;
+			text-align: center;
+			padding-left: 10px;
+			padding-right: 10px;
+			color: var(--mg-color-light);
+			position: fixed;
+			right: 0;
+			bottom: 5vh;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+			width: 20vw;
+			opacity: 95%;
+		}
+		
+		#button-nav {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+			border-top-left-radius: 0;
+			width: 20vw;
+		}
+		
+		button {
+			font-family: 'Roboto Mono', monospace;
+			border: 0.0rem solid var(--mg-color-primary);
+		}
+		
+		#lang-li {
+			display: flex;
+		}
+		
+		#lang-li > li {
+			width: 50%;
+			text-align: center;
+			font-size: 1.5rem;
+		}
+		
+		.main-title-background {
+			background: linear-gradient(90deg, rgba(10,140,140,1) 0%, rgba(10,83,140,1) 70%, rgba(10,83,140,1) 100%);
+		}
+		
+		.main-menu-background {
+			background: linear-gradient(90deg, rgba(224,126,52,1) 0%, rgba(255,77,150,1) 100%);
+		}
+		
+		.main-modal-button-background {
+			background: linear-gradient(90deg, rgba(224,126,52,1) 40%, rgba(251,126,177,1) 100%);
+		}
+		
+		.mg-dropdown--menu {
+			width: max-content;
+			box-shadow: var(--mg-control-shadow);
+			min-width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			border: 0px solid;
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+			display: none;
+			position: absolute;
+			background-color: var(--mg-color-initial);
+			top: 100%;
+			z-index: 1;
+			border-color: var(--mg-color-quaternary);
+			border-radius: var(--mg-input-radius);
+		}
+		
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			border-radius: var(--mg-control-radius);
+			transition: 0.3s;
+			margin-bottom: 2.5rem;
+		}
+		
+		.card > a > img {
+			border-radius: var(--mg-control-radius);
+		}
+		
+		.card > .card-container {
+			padding: 20px;
+		}
+		
+		.card > .card-container > h {
+			text-align: center;
+		}
+		
+		.card > .card-container > p {
+			text-align: left;
+		}
+	</style>
+	
+</head>
+<body class="loaded">
+	<main class="wrapper">
+		<nav class="navigation" style="opacity: 95%;">
+			<div class="mg-container">
+				<div class="mg-row mg-x12 mg-x--baseline main-title-background">
+					<div title="NUMBER AR" class="navigation-title mg-left mg-x9 mg-s9 mg-m9">
+						<img class="logo" style="margin-right: 5px;margin-left: 5px;" src="static/freeicoms_io_20933744261596027129_light.svg"><span id="navbar-title">NUMBER AR</span>
+					</div>
+					<div class="mg-dropdown" style="position: fixed;right: 0;">
+						<button id="button-nav" class="main-menu-background" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							MENU
+						</button>
+					  <div class="mg-dropdown--menu mg-dropdown--menu-right" aria-hidden="true" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">
+						<ul id="nav-li">
+							<li class="active"><a href="#home">HOME</a></li>
+							<li><a href="#chapters">CHAPTERS</a></li>
+							<li><a href="#about">ABOUT</a></li>
+							<li><a href="#acknowledgment">ACKNOWLEDGMENT</a></li>
+						</ul>
+						<ul id="lang-li">
+							<li><a href="#TH">ไทย</a></li>
+							<li class="active"><a href="#EN">EN</a></li>
+						</ul>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div class="page">
+			<div class="mg-container">
+
+				<section id="home" class="mg-center-block">
+					<h1 class="title">Home</h1>
+					<p>
+						Aenean in ex eu ante viverra semper. Nullam at condimentum
+						quam. Sed elit sapien, maximus ac pretium ac, viverra
+						aliquam tortor. Class aptent taciti sociosqu ad litora
+						torquent per conubia nostra, per inceptos himenaeos. Cras
+						sed sapien fermentum, elementum mi efficitur, congue
+						tellus. Interdum et malesuada fames ac ante ipsum primis
+						in faucibus. Cras malesuada lorem enim, eget scelerisque
+						orci vestibulum a. Proin scelerisque enim nibh, egestas
+						euismod nunc aliquam vel. Pellentesque facilisis lacus
+						tortor, nec dictum augue porttitor nec. Quisque ut lacus
+						eleifend lorem lobortis fermentum nec sit amet lacus.
+						Vestibulum vehicula lobortis lectus ut pellentesque.
+						Nullam tempus in ligula at lacinia. Etiam accumsan
+						eleifend nunc, at rhoncus nulla tincidunt sed. Sed turpis
+						dui, hendrerit vitae finibus ut, luctus quis ligula.
+						Aenean venenatis id diam tempor interdum. Nulla mauris
+						est, lacinia a fermentum at, ullamcorper ut ante.
+					</p>
+				</section>
+				<section id="chapters" class="mg-center-block">
+					<h1 class="title">Chapters</h1>
+					<div class="card mg-row">
+						<a class="mg-x12 mg-s5 mg-m5 mg-l5" href="chapter_1.html">
+							<img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Avatar">
+						</a>
+						<div class="card-container mg-x12 mg-s7 mg-m7 mg-l7">
+							<h3><b>CHAPTER 1: Counting</b></h3> 
+							<p>Cras malesuada lorem enim, eget scelerisque
+						orci vestibulum a. Proin scelerisque enim nibh, egestas
+						euismod nunc aliquam vel.</p> 
+						</div>
+					</div>
+					<div class="card mg-row">
+						<a class="mg-x12 mg-s5 mg-m5 mg-l5" href="#">
+							<img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Avatar">
+						</a>
+						<div class="card-container mg-x12 mg-s7 mg-m7 mg-l7">
+							<h3><b>CHAPTER 2: Simple Operations</b></h3> 
+							<p>Cras malesuada lorem enim, eget scelerisque
+						orci vestibulum a. Proin scelerisque enim nibh, egestas
+						euismod nunc aliquam vel.</p> 
+						</div>
+					</div>
+					<div class="card mg-row">
+						<a class="mg-x12 mg-s5 mg-m5 mg-l5" href="#">
+							<img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Avatar">
+						</a>
+						<div class="card-container mg-x12 mg-s7 mg-m7 mg-l7">
+							<h3><b>CHAPTER 3: Multiple Operations</b></h3> 
+							<p>Cras malesuada lorem enim, eget scelerisque
+						orci vestibulum a. Proin scelerisque enim nibh, egestas
+						euismod nunc aliquam vel.</p> 
+						</div>
+					</div>
+				</section>
+				<section id="about" class="mg-center-block">
+					<h1 class="title">About</h1>
+									<p>
+						Aenean in ex eu ante viverra semper. Nullam at condimentum
+						quam. Sed elit sapien, maximus ac pretium ac, viverra
+						aliquam tortor. Class aptent taciti sociosqu ad litora
+						torquent per conubia nostra, per inceptos himenaeos. Cras
+						sed sapien fermentum, elementum mi efficitur, congue
+						tellus. Interdum et malesuada fames ac ante ipsum primis
+						in faucibus. Cras malesuada lorem enim, eget scelerisque
+						orci vestibulum a. Proin scelerisque enim nibh, egestas
+						euismod nunc aliquam vel. Pellentesque facilisis lacus
+						tortor, nec dictum augue porttitor nec. Quisque ut lacus
+						eleifend lorem lobortis fermentum nec sit amet lacus.
+						Vestibulum vehicula lobortis lectus ut pellentesque.
+						Nullam tempus in ligula at lacinia. Etiam accumsan
+						eleifend nunc, at rhoncus nulla tincidunt sed. Sed turpis
+						dui, hendrerit vitae finibus ut, luctus quis ligula.
+						Aenean venenatis id diam tempor interdum. Nulla mauris
+						est, lacinia a fermentum at, ullamcorper ut ante.
+					</p>
+				</section>
+				<section id="acknowledgment" class="mg-center-block">
+				<h1 class="title">Acknowledgment</h1>
+								<p>
+					Aenean in ex eu ante viverra semper. Nullam at condimentum
+					quam. Sed elit sapien, maximus ac pretium ac, viverra
+					aliquam tortor. Class aptent taciti sociosqu ad litora
+					torquent per conubia nostra, per inceptos himenaeos. Cras
+					sed sapien fermentum, elementum mi efficitur, congue
+					tellus. Interdum et malesuada fames ac ante ipsum primis
+					in faucibus. Cras malesuada lorem enim, eget scelerisque
+					orci vestibulum a. Proin scelerisque enim nibh, egestas
+					euismod nunc aliquam vel. Pellentesque facilisis lacus
+					tortor, nec dictum augue porttitor nec. Quisque ut lacus
+					eleifend lorem lobortis fermentum nec sit amet lacus.
+					Vestibulum vehicula lobortis lectus ut pellentesque.
+					Nullam tempus in ligula at lacinia. Etiam accumsan
+					eleifend nunc, at rhoncus nulla tincidunt sed. Sed turpis
+					dui, hendrerit vitae finibus ut, luctus quis ligula.
+					Aenean venenatis id diam tempor interdum. Nulla mauris
+					est, lacinia a fermentum at, ullamcorper ut ante.
+				</p>
+			</section>
+			</div>
+		</div>
+	</main>
+	<script src="static/mg-plus/mg-plus-extensions.js"></script>
+	<script>
+		let section_list = ["home", "chapters", "about", "acknowledgment"]
+		let li_index_dict = {	"home": 0, 
+								"chapters": 1, 
+								"about": 2, 
+								"acknowledgment": 3
+							}
+		
+		// Credit: https://medium.com/swlh/intersection-observer-in-javascript-efcf13c154ce
+		let observerConfig = {root: null, rootMargin: '0px', threshold: 0.51};
+		function observerFn(entries, observer) {
+			if(entries[0].isIntersecting){
+				let li_list = Array.from(document.getElementById("nav-li").children)
+				li_list.forEach(li =>
+					li.classList.remove("active")
+				)
+				index = li_index_dict[entries[0].target.id]
+				li_list[index].classList.add("active");
+				//document.getElementById("navbar-title").textContent = navbartitle_baseText + entries[0].target.id.toUpperCase();
+			}
+		}
+		let observer = new IntersectionObserver(observerFn, observerConfig);
+
+		section_list.forEach(section_text => 
+			observer.observe(document.getElementById(section_text))
+		)
+	</script>
+	<script
+			  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+			  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+			  crossorigin="anonymous"></script>
+	<script>
+		$('li').on('click', function(){
+			$('li').removeClass('active');
+			$(this).addClass('active');
+		});
+	</script>
+</body>
+</html>
